@@ -1,52 +1,27 @@
 using System.Collections;
 using UnityEngine;
 
-/* Door.cs
-*   Author: Ethan Sowle
-*   Description: This class allows the tutorial door to slide down
-                  whenever the SlideDoor function is activated.
-*   Parametes: None
-*   Return: None
-*   Date Created: 2/21/2024
-*   Date Modified: 2/21/2024
-*/
-
 public class Door : MonoBehaviour
 {
-    public float slideSpeed = 1f;
+    public static float slideSpeed = 1f;
+    private static Transform trans;
 
-    /* SlideDoor()
-    *   Author: Ethan Sowle
-    *   Description: Perforns the StartCoroutine function to slide the door down
-    *   Parametes: None
-    *   Return: None
-    *   Date Created: 2/21/2024
-    *   Date Modified: 2/21/2024
-    */
-    public void SlideDoor()
+    public static void SlideDoor(MonoBehaviour instance)
     {
-        StartCoroutine(SlideToGround());
+        instance.StartCoroutine(SlideToGround());
     }
 
     // Start is called before the first frame update
     void Start() {
-        
+        trans = GetComponent<Transform> ();
     }
 
-    /* SlideToGround()
-    *   Author: Ethan Sowle
-    *   Description: Slides the door down to the ground
-    *   Parametes: None
-    *   Return: IEnumerator
-    *   Date Created: 2/21/2024
-    *   Date Modified: 2/21/2024
-    */
-    private IEnumerator SlideToGround()
+    private static IEnumerator SlideToGround()
     {
-        while (transform.position.y > 0)
+        while (trans.position.y > 0)
         {
-            float newYPosition = Mathf.Max(transform.position.y - slideSpeed * Time.deltaTime, 0);
-            transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
+            float newYPosition = Mathf.Max(trans.position.y - slideSpeed * Time.deltaTime, 0);
+            trans.position = new Vector3(trans.position.x, newYPosition, trans.position.z);
             yield return null;
         }
     }
