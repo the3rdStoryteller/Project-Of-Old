@@ -1,6 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
+/* Door.cs
+*   Author: Ethan Sowle
+*   Description: A class to lower the door when the player activates
+*      four floor triggers. 
+*   Parametes: None
+*   Return: None
+*   Date Created: 2/21/2024
+*   Date Modified: 2/22/2024
+*/
+
 public class Door : MonoBehaviour
 {
     public static float slideSpeed = 1f;
