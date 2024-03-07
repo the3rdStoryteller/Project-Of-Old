@@ -4,7 +4,7 @@ using UnityEngine;
 
 /* FloorTriggers.cs
 *   Author: Ethan Sowle
-*   Description: A class to detect when the player has collided with a floor trigger
+*   Description: A class to detect when the player has collided with a floor trigger.
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/22/2024
@@ -37,6 +37,7 @@ public class FloorTriggers : MonoBehaviour
             Debug.Log("Player has collided with the trigger");
             isNotTriggered = false;
             TutorialPuzzle.addToActiveTriggers(this);
+            Destroy(transform.GetChild(0).gameObject);
         }
     }
 }
