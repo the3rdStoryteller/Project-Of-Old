@@ -6,7 +6,7 @@ using UnityEngine;
 
 /* TutorialPuzzle.cs
 *   Author: Ethan Sowle
-*   Description: A class to count the amount of triggers to activate the door
+*   Description: A class to count the amount of triggers to activate the door.
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/22/2024
