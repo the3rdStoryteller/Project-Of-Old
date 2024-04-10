@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Of Old" style="font-size: 110px; -unity-text-outline-color: rgba(0, 0, 0, 0); color: rgb(83, 205, 180);" />
+    <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" style="height: 38px; position: relative; bottom: -75px;" />
+</ui:UXML>
