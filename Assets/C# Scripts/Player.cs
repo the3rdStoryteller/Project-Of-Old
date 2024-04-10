@@ -12,7 +12,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public int health = 10;
     public int attackDMG = 3;
-    public float attackRange = 1.0f;
+    public float attackRange = 2.0f;
     public float speed = 3.0F;
     public float jumpSpeed = 4.0F;
     private Vector3 moveDirection = Vector3.zero;
@@ -55,14 +55,17 @@ public class Player : MonoBehaviour {
     {
         // Detect enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayers);
-        Debug.Log(transform.position);
-        Debug.Log(attackRange);
-        Debug.Log(enemyLayers);
+        //Debug.Log(transform.position);
+        //Debug.Log(attackRange);
+        //Debug.Log(enemyLayers);
 
         // Damage them
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyControl>().TakeDamage(attackDMG);
+            if (enemy.TryGetComponent<EnemyControl>(out var enemyControl))
+            {
+                enemyControl.TakeDamage(attackDMG);
+            }
         }
     }
 }

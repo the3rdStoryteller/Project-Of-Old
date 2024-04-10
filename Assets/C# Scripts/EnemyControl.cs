@@ -34,13 +34,16 @@ public class EnemyControl : MonoBehaviour
         direction.Normalize();
 
         // Move the enemy towards the player
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * direction;
     }
 
     public void TakeDamage(int damage)
     {
         // Reduce the current health by the damage amount.
         currentHealth -= damage;
+
+        Debug.Log("Enemy took " + damage + " damage.");
+        Debug.Log("Current health: " + currentHealth);
 
         // Check if the enemy is dead.
         if (currentHealth <= 0)
