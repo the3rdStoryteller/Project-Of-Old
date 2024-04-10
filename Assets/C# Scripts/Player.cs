@@ -6,23 +6,26 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/6/2024
-*   Date Modified: 2/25/2024
+*   Date Modified: 4/10/2024
 */
 
 public class Player : MonoBehaviour {
     public int health = 10;
     public int attackDMG = 3;
-    public float attackRange = 2.0f;
+    public float attackRange = 1.0f;
     public float speed = 3.0F;
     public float jumpSpeed = 4.0F;
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     public LayerMask enemyLayers;
+    public Vector3 respawnPoint;
+    public float respawnYPos = -10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        respawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -49,15 +52,29 @@ public class Player : MonoBehaviour {
         {
             Attack();
         }
+
+        // Respawns Player if killed
+        if(health <= 0)
+        {
+            Respawn();
+        }
+
+        // Respawn Player if they fall off the map
+        if (transform.position.y < respawnYPos)
+        {
+            Respawn();
+        }
     }
 
+    // Function to handle player attacks
     void Attack() 
     {
         // Detect enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayers);
-        //Debug.Log(transform.position);
-        //Debug.Log(attackRange);
-        //Debug.Log(enemyLayers);
+       
+        /*Debug.Log(transform.position);
+        Debug.Log(attackRange);
+        Debug.Log(enemyLayers);*/
 
         // Damage them
         foreach (Collider enemy in hitEnemies)
@@ -67,5 +84,12 @@ public class Player : MonoBehaviour {
                 enemyControl.TakeDamage(attackDMG);
             }
         }
+    }
+
+    // Function to handle player respawning
+    void Respawn() 
+    {
+        health = 10;
+        transform.position = respawnPoint;
     }
 }

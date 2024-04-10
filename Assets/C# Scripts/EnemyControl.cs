@@ -8,7 +8,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/24/2024
-*   Date Modified: 2/25/2024
+*   Date Modified: 4/09/2024
 */
 
 public class EnemyControl : MonoBehaviour
@@ -37,6 +37,7 @@ public class EnemyControl : MonoBehaviour
         transform.position += speed * Time.deltaTime * direction;
     }
 
+    // Function to take damage
     public void TakeDamage(int damage)
     {
         // Reduce the current health by the damage amount.
@@ -53,6 +54,7 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
+    // Function for death
     void Die()
     {
         // Destroy the enemy object
