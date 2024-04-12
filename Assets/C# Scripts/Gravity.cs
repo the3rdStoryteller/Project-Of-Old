@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /* Gravity.cs
@@ -8,7 +6,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/22/2024
-*   Date Modified: 2/22/2024
+*   Date Modified: 4/11/2024
 */
 
 public class Gravity : MonoBehaviour
