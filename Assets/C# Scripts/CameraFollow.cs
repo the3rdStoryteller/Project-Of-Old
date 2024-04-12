@@ -6,7 +6,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/11/2024
-*   Date Modified: 4/11/2024
+*   Date Modified: 4/12/2024
 */
 
 public class CameraFollow : MonoBehaviour

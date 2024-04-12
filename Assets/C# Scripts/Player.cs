@@ -7,7 +7,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/6/2024
-*   Date Modified: 4/11/2024
+*   Date Modified: 4/12/2024
 */
 
 public class Player : MonoBehaviour {
@@ -24,7 +24,8 @@ public class Player : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     public LayerMask enemyLayers;
-    public Vector3 respawnPoint;
+    private Vector3 respawnPos;
+    private Quaternion respawnRos;
     public float respawnYPos = -10.0f;
 
     // Start is called before the first frame update
@@ -34,8 +35,11 @@ public class Player : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
 
-        // Set the respawn point to the player's starting position
-        respawnPoint = transform.position;
+        // Set the respawn position to the player's starting position
+        respawnPos = transform.position;
+
+        // Set the respawn rotation to the player's starting rotation
+        respawnRos = transform.rotation;
     }
 
     // Update is called once per frame
@@ -137,7 +141,7 @@ public class Player : MonoBehaviour {
         Respawn();
     }
 
-    // Coroutine to disable the GameObject after a delay
+    // Coroutine to enable the GameObject after a delay
     /*IEnumerator DisableAfterDelay(float delay)
     {
         // Wait for the specified delay
@@ -153,9 +157,10 @@ public class Player : MonoBehaviour {
     // Function to handle player respawning
     void Respawn() 
     {
-        // Reset player's health and position
+        // Reset player's health and position and rotation
         health = 10;
-        transform.position = respawnPoint;
+        transform.position = respawnPos;
+        transform.rotation = respawnRos;
 
         // Re-enable the Player object
         this.gameObject.SetActive(true);
