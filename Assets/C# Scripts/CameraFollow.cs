@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     public Transform playerTransform;
     public float mouseSensitivity = 100.0f;
     [HideInInspector] public Vector3 offset;
-    private float xRotation = -45.0f;
+    private float xRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class CameraFollow : MonoBehaviour
         playerTransform.Rotate(Vector3.up * mouseX);
 
         // Position the camera behind the player
-        offset = new Vector3(-3, 2, 0);
+        offset = new Vector3(0, 2, -3);
 
         // Apply player rotation to offset
         offset = playerTransform.rotation * offset;
@@ -43,6 +43,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = newPosition;
 
         // Rotate camera to look at player
+        //transform.LookAt(new Vector3(playerTransform.position.x - 90f, playerTransform.position.y, playerTransform.position.z));
         transform.LookAt(playerTransform);
         transform.Rotate(-30, 0, 0);
     }

@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
         // Check if the player is on the ground
         if (controller.isGrounded) 
         {
-            moveDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
 
