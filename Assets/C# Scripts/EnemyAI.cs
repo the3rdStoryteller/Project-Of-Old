@@ -133,6 +133,19 @@ public class EnemyAI : MonoBehaviour
     void Die()
     {
         // Destroy the enemy object
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+
+        // Respawn the enemy after 5 seconds
+        Invoke("Respawn", 5.0f);
+    }
+
+    // Function to respawn the enemy
+    void Respawn()
+    {
+        // Reset enemy's health
+        currentHealth = maxHealth;
+
+        // Respawn the enemy
+        this.gameObject.SetActive(true);
     }
 }
