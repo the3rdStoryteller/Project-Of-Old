@@ -158,7 +158,7 @@ public class Player : MonoBehaviour {
     void Respawn() 
     {
         // Reset player's health and position and rotation
-        health = 10;
+        health = 3;
         transform.position = respawnPos;
         transform.rotation = respawnRos;
 
