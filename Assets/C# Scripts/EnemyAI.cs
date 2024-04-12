@@ -24,10 +24,15 @@ public class EnemyAI : MonoBehaviour
     private float attackRange;
     public float attackDelay = 1.0f;
     private bool isAttacking = false;
+    public Vector3 respawnPoint;
 
     private void Awake()
     {
+        // Get the NavMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        // Set the respawn point to the enemy's starting position
+        respawnPoint = transform.position;
     }
     
     // Start is called before the first frame update
@@ -42,6 +47,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
+            // Check if the player is within attack range
             bool inRange = Vector3.Distance(transform.position, target.position) <= attackRange;
 
             if (inRange)
@@ -64,7 +70,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // Function to look at the target
+    // Function to look at the player
     private void LookAtTarget()
     {
         Vector3 lookPos = target.position - transform.position;
@@ -73,14 +79,19 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
     }
 
-    // Function to track target
+    // Function to update path to player
     private void UpdatePath()
     {
         if (Time.time >= pathUpdateDeadline)
         {
-            //Debug.Log("Updating path");
+            // Get a reference to the NavMeshAgent component
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+
+            // Set the destination to the players's position
+            agent.SetDestination(target.position);
+
+            // Update the path every 0.2 seconds
             pathUpdateDeadline = Time.time + pathUpdateDelay;
-            navMeshAgent.SetDestination(target.position);
         }
     }
 
@@ -142,8 +153,9 @@ public class EnemyAI : MonoBehaviour
     // Function to respawn the enemy
     void Respawn()
     {
-        // Reset enemy's health
+        // Reset enemy's health and position
         currentHealth = maxHealth;
+        transform.position = respawnPoint;
 
         // Respawn the enemy
         this.gameObject.SetActive(true);
