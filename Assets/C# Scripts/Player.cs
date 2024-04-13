@@ -132,30 +132,15 @@ public class Player : MonoBehaviour {
         // Play death sound
         audioSource.PlayOneShot(deathSound);
 
-        // Start the DisableAfterDelay coroutine, passing in the length of the death sound
-        //StartCoroutine(DisableAfterDelay(deathSound.length));
-
         // Disable the Player object
         this.gameObject.SetActive(false);
 
         // Unlock the cursor
         Cursor.lockState = CursorLockMode.None;
+
         // Call the death screen
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    // Coroutine to enable the GameObject after a delay
-    /*IEnumerator DisableAfterDelay(float delay)
-    {
-        // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
-
-        // Disable the Player object
-        this.gameObject.SetActive(false);
-
-        // Call Respawn function
-        Respawn();
-    }*/
 
     // Function to handle player respawning
     void Respawn() 
