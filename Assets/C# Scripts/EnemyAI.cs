@@ -156,6 +156,7 @@ public class EnemyAI : MonoBehaviour
         // Reset enemy's health and position
         currentHealth = maxHealth;
         transform.position = respawnPoint;
+        isAttacking = false;
 
         // Respawn the enemy
         this.gameObject.SetActive(true);

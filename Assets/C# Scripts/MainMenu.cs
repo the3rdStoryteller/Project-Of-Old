@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 /* MainMenu.cs
 *   Author: Ethan Sowle
-*   Description: A class to change scenes in the game.
+*   Description: A class to display main menu options.
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/12/2024
@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void Play()
-    { 
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

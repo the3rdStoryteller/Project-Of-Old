@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /* Player.cs
 *   Author: Ethan Sowle
@@ -81,10 +82,10 @@ public class Player : MonoBehaviour {
             Attack();
         }
 
-        // Respawn the player if they fall off the map
+        // Kill the player if they fall off the map
         if (transform.position.y < respawnYPos)
         {
-            Respawn();
+            Die();
         }
     }
 
@@ -137,8 +138,10 @@ public class Player : MonoBehaviour {
         // Disable the Player object
         this.gameObject.SetActive(false);
 
-        // Call Respawn function
-        Respawn();
+        // Unlock the cursor
+        Cursor.lockState = CursorLockMode.None;
+        // Call the death screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Coroutine to enable the GameObject after a delay
