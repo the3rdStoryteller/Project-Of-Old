@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/6/2024
-*   Date Modified: 4/12/2024
+*   Date Modified: 4/24/2024
 */
 
 public class Player : MonoBehaviour {
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     public float attackRange = 1.0f;
     public AudioClip attackSound;
     public AudioClip deathSound;
+    public AudioClip damageSound;
     public AudioSource audioSource;
     public float speed = 3.0F;
     public float jumpSpeed = 0.5F;
@@ -117,6 +118,9 @@ public class Player : MonoBehaviour {
 
         Debug.Log("Player took " + damage + " damage.");
         Debug.Log("Current health: " + health);
+
+        // Play damage sound
+        audioSource.PlayOneShot(damageSound);
 
         // Check if the player is dead.
         if (health <= 0)

@@ -8,7 +8,7 @@ using UnityEngine.AI;
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/11/2024
-*   Date Modified: 4/11/2024
+*   Date Modified: 4/24/2024
 */
 
 public class EnemyAI : MonoBehaviour
@@ -25,6 +25,9 @@ public class EnemyAI : MonoBehaviour
     public float attackDelay = 1.0f;
     private bool isAttacking = false;
     public Vector3 respawnPoint;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioSource audioSource;
 
     private void Awake()
     {
@@ -110,6 +113,9 @@ public class EnemyAI : MonoBehaviour
             // Reduce the player's health
             playerHealth.TakeDamage(attackDMG);
 
+            // Play attack sound
+            audioSource.PlayOneShot(attackSound);
+
             // Start attack delay coroutine
             StartCoroutine(AttackDelay());
         }
@@ -135,6 +141,9 @@ public class EnemyAI : MonoBehaviour
         // Check if the enemy is dead.
         if (currentHealth <= 0)
         {
+            // Play death sound
+            audioSource.PlayOneShot(deathSound);
+
             // Call the Die function.
             Die();
         }
