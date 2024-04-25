@@ -8,7 +8,7 @@ using UnityEngine.AI;
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/11/2024
-*   Date Modified: 4/24/2024
+*   Date Modified: 4/25/2024
 */
 
 public class EnemyAI : MonoBehaviour
@@ -28,11 +28,15 @@ public class EnemyAI : MonoBehaviour
     public AudioClip attackSound;
     public AudioClip deathSound;
     public AudioSource audioSource;
+    private Animator animator;
 
     private void Awake()
     {
         // Get the NavMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        // Get the Animator component
+        animator = GetComponent<Animator>();
 
         // Set the respawn point to the enemy's starting position
         respawnPoint = transform.position;
@@ -41,7 +45,10 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set attack range to the NavMeshAgent's stopping distance
         attackRange = navMeshAgent.stoppingDistance;
+
+        // Reset enemy's health
         currentHealth = maxHealth;
     }
 
@@ -56,10 +63,14 @@ public class EnemyAI : MonoBehaviour
             if (inRange)
             {
                 LookAtTarget();
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isAttacking", true);
             }
             else
             {
                 UpdatePath();
+                animator.SetBool("isAttacking", false);
+                animator.SetBool("isWalking", true);
             }
         }
 
@@ -70,6 +81,7 @@ public class EnemyAI : MonoBehaviour
         if (distanceToPlayer <= attackRange)
         {
             Attack();
+            animator.SetBool("isWalking", false);
         }
     }
 

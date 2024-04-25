@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/6/2024
-*   Date Modified: 4/24/2024
+*   Date Modified: 4/25/2024
 */
 
 public class Player : MonoBehaviour {
@@ -29,13 +29,15 @@ public class Player : MonoBehaviour {
     private Vector3 respawnPos;
     private Quaternion respawnRos;
     public float respawnYPos = -10.0f;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get the CharacterController and AudioSource components
+        // Get the CharacterController, AudioSource, and Animator components
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        //animator = GetComponent<Animator>();
 
         // Set the respawn position to the player's starting position
         respawnPos = transform.position;
