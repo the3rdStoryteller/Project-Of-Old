@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /* Player.cs
 *   Author: Ethan Sowle
@@ -7,7 +8,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 2/6/2024
-*   Date Modified: 4/12/2024
+*   Date Modified: 4/25/2024
 */
 
 public class Player : MonoBehaviour {
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour {
     public float attackRange = 1.0f;
     public AudioClip attackSound;
     public AudioClip deathSound;
+    public AudioClip damageSound;
     public AudioSource audioSource;
     public float speed = 3.0F;
     public float jumpSpeed = 0.5F;
@@ -27,13 +29,15 @@ public class Player : MonoBehaviour {
     private Vector3 respawnPos;
     private Quaternion respawnRos;
     public float respawnYPos = -10.0f;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get the CharacterController and AudioSource components
+        // Get the CharacterController, AudioSource, and Animator components
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        //animator = GetComponent<Animator>();
 
         // Set the respawn position to the player's starting position
         respawnPos = transform.position;
@@ -81,10 +85,10 @@ public class Player : MonoBehaviour {
             Attack();
         }
 
-        // Respawn the player if they fall off the map
+        // Kill the player if they fall off the map
         if (transform.position.y < respawnYPos)
         {
-            Respawn();
+            Die();
         }
     }
 
@@ -117,6 +121,9 @@ public class Player : MonoBehaviour {
         Debug.Log("Player took " + damage + " damage.");
         Debug.Log("Current health: " + health);
 
+        // Play damage sound
+        audioSource.PlayOneShot(damageSound);
+
         // Check if the player is dead.
         if (health <= 0)
         {
@@ -131,34 +138,21 @@ public class Player : MonoBehaviour {
         // Play death sound
         audioSource.PlayOneShot(deathSound);
 
-        // Start the DisableAfterDelay coroutine, passing in the length of the death sound
-        //StartCoroutine(DisableAfterDelay(deathSound.length));
-
         // Disable the Player object
         this.gameObject.SetActive(false);
 
-        // Call Respawn function
-        Respawn();
+        // Unlock the cursor
+        Cursor.lockState = CursorLockMode.None;
+
+        // Call the death screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    // Coroutine to enable the GameObject after a delay
-    /*IEnumerator DisableAfterDelay(float delay)
-    {
-        // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
-
-        // Disable the Player object
-        this.gameObject.SetActive(false);
-
-        // Call Respawn function
-        Respawn();
-    }*/
 
     // Function to handle player respawning
     void Respawn() 
     {
         // Reset player's health and position and rotation
-        health = 10;
+        health = 3;
         transform.position = respawnPos;
         transform.rotation = respawnRos;
 
