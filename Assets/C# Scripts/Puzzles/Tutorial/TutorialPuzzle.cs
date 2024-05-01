@@ -12,13 +12,13 @@ using UnityEngine;
 public class TutorialPuzzle : MonoBehaviour
 {
     private static int activeTriggers;
+
     // Start is called before the first frame update
     void Start()
     {
         activeTriggers = 0;
     }
 
-    // Update is called once per frame
     public static void addToActiveTriggers(MonoBehaviour instance)
     {
         activeTriggers++;

@@ -8,7 +8,7 @@ using UnityEngine.AI;
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/11/2024
-*   Date Modified: 4/25/2024
+*   Date Modified: 5/1/2024
 */
 
 public class EnemyAI : MonoBehaviour
@@ -63,14 +63,11 @@ public class EnemyAI : MonoBehaviour
             if (inRange)
             {
                 LookAtTarget();
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isAttacking", true);
+                animator.SetTrigger("isWalking");
             }
             else
             {
                 UpdatePath();
-                animator.SetBool("isAttacking", false);
-                animator.SetBool("isWalking", true);
             }
         }
 
@@ -81,7 +78,6 @@ public class EnemyAI : MonoBehaviour
         if (distanceToPlayer <= attackRange)
         {
             Attack();
-            animator.SetBool("isWalking", false);
         }
     }
 
@@ -118,6 +114,9 @@ public class EnemyAI : MonoBehaviour
         {
             // Set attacking bool to true
             isAttacking = true;
+
+            // Play attack animation
+            animator.SetTrigger("isAttacking");
 
             // Get the player's health script
             Player playerHealth = playerOBJ.GetComponent<Player>();

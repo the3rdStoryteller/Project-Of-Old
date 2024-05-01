@@ -15,7 +15,6 @@ public class Player : MonoBehaviour {
     public int attackDMG = 3;
     public float attackRange = 1.0f;
     public AudioClip attackSound;
-    public AudioClip deathSound;
     public AudioClip damageSound;
     public AudioSource audioSource;
     public float speed = 3.0F;
@@ -134,14 +133,15 @@ public class Player : MonoBehaviour {
     // Function to handle player death
     void Die()
     {
-        // Play death sound
-        audioSource.PlayOneShot(deathSound);
-
         // Disable the Player object
         this.gameObject.SetActive(false);
 
         // Unlock the cursor
         Cursor.lockState = CursorLockMode.None;
+
+        // Reset the active triggers for the puzzles
+        PortalPuzzle.ResetActiveTriggers();
+        FirstPuzzle.ResetActiveTriggers();
 
         // Call the death screen
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

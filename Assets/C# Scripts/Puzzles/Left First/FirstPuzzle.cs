@@ -25,4 +25,9 @@ public class FirstPuzzle : MonoBehaviour
         return activeTriggers;
     }
 
+    public static void ResetActiveTriggers()
+    {
+        activeTriggers = 0;
+    }
+
 }

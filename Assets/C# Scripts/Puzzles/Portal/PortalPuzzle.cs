@@ -13,6 +13,7 @@ public class PortalPuzzle : MonoBehaviour
 {
     private static int activeTriggers;
 
+    // Start is called before the first frame update
     void Start()
     {
         activeTriggers = 0;
@@ -33,5 +34,10 @@ public class PortalPuzzle : MonoBehaviour
     {
         Debug.Log(activeTriggers);
         return activeTriggers;
+    }
+
+    public static void ResetActiveTriggers()
+    {
+        activeTriggers = 0;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 *   Parametes: None
 *   Return: None
 *   Date Created: 4/11/2024
-*   Date Modified: 4/12/2024
+*   Date Modified: 5/1/2024
 */
 
 public class CameraFollow : MonoBehaviour
@@ -43,7 +43,6 @@ public class CameraFollow : MonoBehaviour
         transform.position = newPosition;
 
         // Rotate camera to look at player
-        //transform.LookAt(new Vector3(playerTransform.position.x - 90f, playerTransform.position.y, playerTransform.position.z));
         transform.LookAt(playerTransform);
         transform.Rotate(-30, 0, 0);
     }
