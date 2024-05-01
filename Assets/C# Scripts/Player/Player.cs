@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
         // Get the CharacterController, AudioSource, and Animator components
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         // Set the respawn position to the player's starting position
         respawnPos = transform.position;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         // Moves the player
         // Check if the player is on the ground
         if (controller.isGrounded) 
@@ -54,6 +54,18 @@ public class Player : MonoBehaviour {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
+
+            // Check if the player is moving
+            if (moveDirection != Vector3.zero)
+            {
+                // Plays the walking animation
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                // Plays the idle animation
+                animator.SetBool("isWalking", false);
+            }
 
             // Check if the Jump button (spacebar by default) is pressed
             if (Input.GetButton("Jump"))
